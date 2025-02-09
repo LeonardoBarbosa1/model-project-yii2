@@ -1,0 +1,84 @@
+{
+    "name": "yiisoft/yii2-app-advanced",
+    "description": "Yii 2 Advanced Project Template",
+    "keywords": ["yii2", "framework", "advanced", "project template"],
+    "homepage": "http://www.yiiframework.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1.0",
+        "yiisoft/yii2": "^2.0.49.3",
+        "yiisoft/yii2-swiftmailer": "^2.1.1",
+        "yiisoft/yii2-authclient": "^2.1",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "hail812/yii2-adminlte3": "^1.1",
+        "kartik-v/yii2-grid": "^3.5.0",
+        "kartik-v/yii2-editable": "^v1.8.0",
+        "kartik-v/yii2-widgets": "^3.4.0",
+        "bower-asset/highcharts-release": "^10.0",
+        "2amigos/yii2-highcharts-widget": "^0.1.0",
+        "hashids/hashids": "^5.0.2",
+        "creocoder/yii2-flysystem": "^0.9.1",
+        "league/flysystem-aws-s3-v3": "^1.0.0",
+        "yiibr/yii2-br-validator": "^1.0.1",
+        "kab91/yii2-yashop-ses": "^1.0.4",
+        "kartik-v/yii2-datecontrol": "^1.9.6",
+        "kartik-v/yii2-date-range": "^1.6.9",
+        "yiibr/yii2-correios": "^2.0.4",
+        "kop/yii2-scroll-pager": "^2.5.0",
+        "aws/aws-sdk-php": "3.319.*",
+        "kartik-v/yii2-export": "^1.2.9",
+        "conquer/gii-modal": "^1.1.1",
+        "yiisoft/yii2-queue": "^2.1.0",
+        "sistemi-etime/flysystem-plugin-aws-s3-v3": "^1.0.0",
+        "frostealth/yii2-aws-s3": "^2.1.1",
+        "yii2mod/yii2-helpers": "^1.3",
+        "antonyz89/yii2-seeder": "dev-master",
+        "antonyz89/yii2-migrate": "dev-master",
+        "antonyz89/yii2-templates": "dev-master",
+        "antonyz89/yii2-many-to-many": "^0.3",
+        "antonyz89/yii2-password-behavior": "dev-master",
+        "antonyz89/yii2-pagesize": "@dev",
+        "antonyz89/yii2-toggle-column": "dev-main",
+        "kartik-v/yii2-detail-view": "^1.8",
+        "symfony/var-dumper": "^4.4"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1.6",
+        "codeception/specify": "^0.4.5",
+        "codeception/verify": "^0.3.2",
+        "yiisoft/yii2-debug": "^2.0.7",
+        "yiisoft/yii2-gii": "^2.0.8",
+        "yiisoft/yii2-faker": "^2.0.3",
+        "bazilio/yii2-stubs-generator": "v1.0.0",
+        "squizlabs/php_codesniffer": "^2.9.2"
+    },
+    "autoload": {
+        "files": [
+            "functions.php"
+        ]
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}

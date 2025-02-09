@@ -1,0 +1,73 @@
+networks:
+  model-project-network:
+    driver: 'bridge'
+
+services:
+  model-project.localhost:
+    container_name: model-project.localhost
+    build:
+      context: .
+      dockerfile: ./docker/apache/Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+    #      - '9000:9000'
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/var/www/html:delegated
+      - ./docker/apache/vhost-dev.conf:/etc/apache2/sites-available/000-default.conf:delegated
+      - ./docker/apache/vhost-ssl-dev.conf:/etc/apache2/sites-available/default-ssl.conf:delegated
+      - ./docker/data/letsencrypt:/etc/letsencrypt
+#    environment:
+#      PHP_ENABLE_XDEBUG: 1
+#      XDEBUG_CONFIG: "client_port=9000 start_with_request=yes idekey=netbeans-xdebug log_level=1 log=/app/xdebug.log discover_client_host=1"
+#      XDEBUG_MODE: "develop,debug,coverage"
+      #AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      #AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    networks:
+      - model-project-network
+
+  mysql.model-project.localhost:
+    container_name: mysql.model-project.localhost
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=model-project
+      - MYSQL_USER=model-project
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/my.cnf
+      - mysql_data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - model-project-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  phpmyadmin.model-project.localhost:
+    container_name: phpmyadmin.model-project.localhost
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '81:80'
+    environment:
+      - PMA_HOST=mysql.model-project.localhost
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=
+      - PMA_DATABASE=model_project
+      - UPLOAD_LIMIT=300M
+    networks:
+      - model-project-network
+    depends_on:
+      - mysql.model-project.localhost
+
+volumes:
+  mysql_data:
